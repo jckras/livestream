@@ -1,4 +1,3 @@
-# viam-youtube-stream
 # [`<INSERT MODULE NAME>` module](<INSERT LINK TO MODULE REPO>)
 
 This [module](https://docs.viam.com/registry/#modular-resources) implements the [`<INSERT API TRIPLET>` API]<INSERT LINK TO DOCS (if applicable)> in an <INSERT MODEL> model.
