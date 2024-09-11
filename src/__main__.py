@@ -8,9 +8,6 @@ async def main():
     Resources must be pre-registered. For an example, see the `__init__.py` file.
     """
     module = Module.from_args()
-    print("I made it past the first line")
-    # Registry.register_resource_creator(Camera.SUBTYPE, youtubeStream.MODEL, ResourceCreatorRegistration(youtubeStream.new, youtubeStream.validate))
-    print("past registration")
     module.add_model_from_registry(Camera.SUBTYPE, youtubeStream.MODEL)
     await module.start()
 
