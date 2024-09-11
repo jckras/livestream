@@ -1,0 +1,14 @@
+{
+  "$schema": "https://dl.viam.dev/module.schema.json",
+  "module_id": "julie:youtubeStream",
+  "visibility": "public",
+  "url": "https://github.com/jckras/camera",
+  "description": "An implementation of a custom Viam Camera component that shows livestreams from web URLS. The camera component reads a youtube URL and simulates live camera behavior by returning frames as images upon request.",
+  "models": [
+    {
+      "api": "rdk:component:camera",
+      "model": "julie:camera:youtubeStream"
+    }
+  ],
+  "entrypoint": "run.sh"
+}
