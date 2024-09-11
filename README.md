@@ -1,15 +1,15 @@
-# youtubeStream modular service
+# video-streamer modular service
 
-This module implements the [rdk camera API](https://github.com/rdk/camera-api) in a youtubeStream model.
+This module implements the [rdk camera API](https://github.com/rdk/camera-api) in a youtube-stream model.
 With this model, you can provide a youtube URL as a configurable attribute to a camera component.
 
 ## Requirements
 
-The module executable is currently only supported on `darwin/arm64`. Make sure your machine is running on one of these architectures to avoid exec format issues.
+The module executable is currently only supported on `linux/arm64`, `linux/amd64`, and `darwin/arm64`. Make sure your machine is running on one of these architectures to avoid exec format issues.
 
 ## Build and Run
 
-To use this module, follow these instructions to [add a module from the Viam Registry](https://docs.viam.com/registry/configure/#add-a-modular-resource-from-the-viam-registry) and select the `rdk:camera:julie:camera:youtubeStream` model from the [`julie:camera:youtubeStream` module](https://app.viam.com/module/rdk/julie:camera:youtube-stream).
+To use this module, follow these instructions to [add a module from the Viam Registry](https://docs.viam.com/registry/configure/#add-a-modular-resource-from-the-viam-registry) and select the `julie:camera:youtube-stream` model from the [`video-streamer` module](https://app.viam.com/module/rdk/julie:camera:youtube-stream).
 
 ## Configure your camera
 
@@ -18,7 +18,7 @@ To use this module, follow these instructions to [add a module from the Viam Reg
 
 Navigate to the **Config** tab of your robot’s page in [the Viam app](https://app.viam.com/).
 Click on the **Components** subtab and click **Create component**.
-Select the `camera` type, then select the `julie:camera:youtubeStream` model. 
+Select the `camera` type, then select the `julie:camera:youtube-stream` model. 
 Enter a name for your camera and click **Create**.
 
 To use this custom Viam Camera component, the following configuration is required:
@@ -40,7 +40,7 @@ Specific Example
 
 ### Attributes
 
-The following attributes are available for `rdk:camera:julie:camera:youtubeStream` cameras:
+The following attributes are available for `julie:camera:youtube-stream` cameras:
 
 | Name | Type | Inclusion | Description |
 | ---- | ---- | --------- | ----------- |
@@ -50,10 +50,10 @@ The following attributes are available for `rdk:camera:julie:camera:youtubeStrea
 
 ```json
 {
-      "name": "youtubeStreamer",
+      "name": "my-youtube-streamer",
       "namespace": "rdk",
       "type": "camera",
-      "model": "julie:camera:youtubeStream",
+      "model": "julie:camera:youtube-stream",
       "attributes": {
         "video_url": "https://www.youtube.com/watch?v=ydYDqZQpim8"
       }

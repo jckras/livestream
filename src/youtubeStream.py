@@ -1,19 +1,20 @@
-import time
+import asyncio
 import cv2
-from yt_dlp import YoutubeDL
+import time
 
 from typing import ClassVar, Dict, Mapping, Optional, Any, Tuple, List
-from viam.media.video import ViamImage, Optional, CameraMimeType, NamedImage
 from typing_extensions import Self
-from viam.proto.common import ResponseMetadata
+from yt_dlp import YoutubeDL
+
 from viam.components.camera import Camera
 from viam.logging import getLogger
+from viam.media.video import ViamImage, Optional, CameraMimeType, NamedImage
+from viam.module.types import Reconfigurable
 from viam.proto.app.robot import ComponentConfig
+from viam.proto.common import ResponseMetadata
 from viam.resource.base import ResourceBase, ResourceName
 from viam.resource.types import Model, ModelFamily
 from viam.utils import struct_to_dict
-from viam.module.types import Reconfigurable
-
 
 LOGGER = getLogger(__name__)
 
@@ -23,10 +24,10 @@ class youtubeStream(Camera, Reconfigurable):
     Camera represents any physical hardware that can capture frames.
     """
     video_url: str
-    default_url = "https://www.youtube.com/watch?v=MusSS4R9SPw"
+    default_url: str = "https://www.youtube.com/watch?v=MusSS4R9SPw"
 
     MODEL: ClassVar[Model] = Model(ModelFamily("julie", "camera"), "youtubeStream")
-    REQUIRED_ATTRIBUTES = ["video_url"]
+    REQUIRED_ATTRIBUTES: ClassVar[List[str]] = ["video_url"]
     
 
     # Constructor
@@ -38,18 +39,18 @@ class youtubeStream(Camera, Reconfigurable):
     
     def __init__(self, name: str):
         super().__init__(name)
-        self.last_call_time = time.time()
-        self.current_frame = 0
-        self.video_cap = None
+        self.last_call_time: float = time.time()
+        self.current_frame: int = 0
+        self.video_cap: Optional [cv2.VideoCapture] = None
 
     # Validates JSON Configuration
     @classmethod
     def validate(cls, config: ComponentConfig):
         # Here we validate config, the following is just an example and should be updated as needed
-        missing_attrs = [attr for attr in cls.REQUIRED_ATTRIBUTES if attr not in config.attributes]
-        if missing_attrs:
+        is_missing_attrs = [attr for attr in cls.REQUIRED_ATTRIBUTES if attr not in config.attributes]
+        if is_missing_attrs:
             LOGGER.error("Missing required attributes in Youtube stream Configuration.")
-            raise ValueError(f"Missing required attributes in Youtube stream Configuration: {', '.join(missing_attrs)}")
+            raise ValueError(f"Missing required attributes in Youtube stream Configuration: {', '.join(is_missing_attrs)}")
         return
     
     def reconfigure(self, config: ComponentConfig, dependencies: Mapping[ResourceName, ResourceBase]):
@@ -90,12 +91,16 @@ class youtubeStream(Camera, Reconfigurable):
         
     async def get_image(self, mime_type: str = "", *, extra: Optional[Dict[str, Any]] = None, timeout: Optional[float] = None, **kwargs) -> ViamImage:
         current_time = time.time()
-        
-        for i in range(5):  # Retry getting the video capture up to 10 times
+
+        # Check if video capture is initialized
+        if self.video_cap is None:
+            raise RuntimeError("Video capture is not initialized.")
+
+        for _ in range(5):  # Retry getting the video capture up to 5 times
             ret, frame = self.video_cap.read()
             if ret:
                 break
-            time.sleep(1)  # Wait 1 second before retrying 
+            await asyncio.sleep(1)  # Wait 1 second before retrying 
         if not ret:
             raise RuntimeError("Failed to capture any frame from the video.")
                 
@@ -118,6 +123,9 @@ class youtubeStream(Camera, Reconfigurable):
         raise NotImplementedError()
         
     async def get_properties(self, *, timeout: Optional[float] = None, **kwargs) -> 'Camera.Properties':
-        raise NotImplementedError()
+        return Camera.Properties(
+        mime_types=['video/mp4', 'image/jpeg']  
+    )
+
     
 
