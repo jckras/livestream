@@ -1,54 +1,69 @@
-# [`<INSERT MODULE NAME>` module](<INSERT LINK TO MODULE REPO>)
+# Livestream modular service
 
-This [module](https://docs.viam.com/registry/#modular-resources) implements the [`<INSERT API TRIPLET>` API]<INSERT LINK TO DOCS (if applicable)> in an <INSERT MODEL> model.
-With this model, you can...
+This module implements the [rdk camera API](https://github.com/rdk/camera-api) in a youtube-stream model.
+With this model, you can provide a youtube URL as a configurable attribute to a camera component.
+
+With this model, you can provide a URL to a video hosted on youtube or [other supported websites](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md) as a configurable attribute to a camera component.
 
 ## Requirements
 
-_Add instructions here for any requirements._
+The module executable is currently only supported on `linux/arm64`, `linux/amd64`, and `darwin/arm64`. Make sure your machine is running on one of these architectures to avoid exec format issues.
 
-```bash
+## Build and Run
 
-```
+To use this module, follow these instructions to [add a module from the Viam Registry](https://docs.viam.com/registry/configure/#add-a-modular-resource-from-the-viam-registry) and select the `julie:vlivestream:youtube-stream` model from the [`livestream` module](https://app.viam.com/module/rdk/julie:camera:youtube-stream).
 
-## Configure your <INSERT MODEL NAME> <INSERT API NAME>
+## Configure your camera
 
-Navigate to the [**CONFIGURE** tab](https://docs.viam.com/configure/) of your [machine](https://docs.viam.com/fleet/machines/) in [the Viam app](https://app.viam.com/).
-[Add <INSERT COMPONENT TYPE / INSERT RESOURCE NAME> to your machine](https://docs.viam.com/configure/#components).
+> [!NOTE]  
+> Before configuring your camera, you must [create a machine](https://docs.viam.com/manage/fleet/machines/#add-a-new-machine).
 
-On the new component panel, copy and paste the following attribute template into your <INSERT API NAME>’s attributes field:
+Navigate to the **Config** tab of your robot’s page in [the Viam app](https://app.viam.com/).
+Click on the **Components** subtab and click **Create component**.
+Select the `camera` type, then select the `julie:livestream:youtube-stream` model. 
+Enter a name for your camera and click **Create**.
+
+To use this custom Viam Camera component, the following configuration is required:
+
+Generalized Attribute Guide
 
 ```json
 {
-  <INSERT SAMPLE ATTRIBUTES>
+  "video_url": "https://www.youtube.com/some_video"
+}
+```
+Specific Example
+
+```json
+{
+  "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 }
 ```
 
 ### Attributes
 
-The following attributes are available for `<INSERT MODEL TRIPLET>` <INSERT API NAME>s:
+The following attributes are available for `julie:livestream:youtube-stream` cameras:
 
-| Name    | Type   | Required?    | Description |
-| ------- | ------ | ------------ | ----------- |
-| `todo1` | string | **Required** | TODO        |
-| `todo2` | string | Optional     | TODO        |
+| Name | Type | Inclusion | Description |
+| ---- | ---- | --------- | ----------- |
+| `video_url` | string | **Required** |  This URL specifies the livestream video that the camera will play. |
 
-### Example configuration
+### Example Configuration
 
 ```json
 {
-  <INSERT SAMPLE CONFIGURATION(S)>
-}
+      "name": "my-youtube-stream",
+      "namespace": "rdk",
+      "type": "camera",
+      "model": "julie:livestream:youtube-stream",
+      "attributes": {
+        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      }
+    }
 ```
-
-### Next steps
-
-_Add any additional information you want readers to know and direct them towards what to do next with this module._
-_For example:_
-
-- To test your...
-- To write code against your...
 
 ## Troubleshooting
 
-_Add troubleshooting notes here._
+_If the livestream fails to load from a particular website, check if it's also available on YouTube_
+
+_Ex: livestreams from [San Diego Zoo live cameras](https://zoo.sandiegozoo.org/live-cameras) may not load directly, but they are available on [YouTube](https://www.youtube.com/@SanDiegoZoo/streams)._

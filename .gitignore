@@ -1,0 +1,10 @@
+# Environments
+.venv
+venv/
+
+__pycache__/
+viam-env/
+
+# Unit tests / Coverage reports
+.cache
+.DS_Store
