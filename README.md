@@ -7,7 +7,7 @@ With this model, you can provide a URL to a video hosted on youtube or [other su
 
 ## Requirements
 
-The module executable is currently only supported on `linux/arm64`, `linux/amd64`, and `darwin/arm64`. Make sure your machine is running on one of these architectures to avoid exec format issues.
+The module executable is currently supported on `linux/arm64`, `linux/amd64`, and `darwin/arm64`. Make sure your machine is running on one of these architectures to avoid exec format issues.
 
 ## Build and Run
 
