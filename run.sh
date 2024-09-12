@@ -32,4 +32,3 @@ if [ -d "viam-env" ]
 # or handle forwarding termination signals manually
 echo "Starting Python module..."
 exec python3 -m src $@
-

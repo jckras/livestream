@@ -104,7 +104,6 @@ class youtubeStream(Camera, Reconfigurable):
         if not ret:
             raise RuntimeError("Failed to encode frame as JPEG.")
         
-
         image_data = jpeg.tobytes()
         return ViamImage(image_data, CameraMimeType.JPEG)
     
@@ -120,6 +119,3 @@ class youtubeStream(Camera, Reconfigurable):
         return Camera.Properties(
         mime_types=['image/jpeg']  
     )
-
-    
-

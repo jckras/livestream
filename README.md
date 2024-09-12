@@ -67,4 +67,3 @@ The following attributes are available for `julie:livestream:youtube-stream` cam
 _If the livestream fails to load from a particular website, check if it's also available on YouTube_
 
 _Ex: livestreams from [San Diego Zoo live cameras](https://zoo.sandiegozoo.org/live-cameras) may not load directly, but they are available on [YouTube](https://www.youtube.com/@SanDiegoZoo/streams)._
-
