@@ -1,4 +1,4 @@
-# video-streamer modular service
+# Livestream modular service
 
 This module implements the [rdk camera API](https://github.com/rdk/camera-api) in a youtube-stream model.
 With this model, you can provide a youtube URL as a configurable attribute to a camera component.
@@ -9,7 +9,7 @@ The module executable is currently only supported on `linux/arm64`, `linux/amd64
 
 ## Build and Run
 
-To use this module, follow these instructions to [add a module from the Viam Registry](https://docs.viam.com/registry/configure/#add-a-modular-resource-from-the-viam-registry) and select the `julie:camera:youtube-stream` model from the [`video-streamer` module](https://app.viam.com/module/rdk/julie:camera:youtube-stream).
+To use this module, follow these instructions to [add a module from the Viam Registry](https://docs.viam.com/registry/configure/#add-a-modular-resource-from-the-viam-registry) and select the `julie:vlivestream:youtube-stream` model from the [`livestream` module](https://app.viam.com/module/rdk/julie:camera:youtube-stream).
 
 ## Configure your camera
 
@@ -18,7 +18,7 @@ To use this module, follow these instructions to [add a module from the Viam Reg
 
 Navigate to the **Config** tab of your robot’s page in [the Viam app](https://app.viam.com/).
 Click on the **Components** subtab and click **Create component**.
-Select the `camera` type, then select the `julie:camera:youtube-stream` model. 
+Select the `camera` type, then select the `julie:livestream:youtube-stream` model. 
 Enter a name for your camera and click **Create**.
 
 To use this custom Viam Camera component, the following configuration is required:
@@ -40,7 +40,7 @@ Specific Example
 
 ### Attributes
 
-The following attributes are available for `julie:camera:youtube-stream` cameras:
+The following attributes are available for `julie:livestream:youtube-stream` cameras:
 
 | Name | Type | Inclusion | Description |
 | ---- | ---- | --------- | ----------- |
@@ -50,10 +50,10 @@ The following attributes are available for `julie:camera:youtube-stream` cameras
 
 ```json
 {
-      "name": "my-youtube-streamer",
+      "name": "my-youtube-stream",
       "namespace": "rdk",
       "type": "camera",
-      "model": "julie:camera:youtube-stream",
+      "model": "julie:livestream:youtube-stream",
       "attributes": {
         "video_url": "https://www.youtube.com/watch?v=ydYDqZQpim8"
       }
@@ -63,3 +63,4 @@ The following attributes are available for `julie:camera:youtube-stream` cameras
 ## Troubleshooting
 
 _If the livestream fails to load from a particular website, check if it's also available on YouTube_
+
