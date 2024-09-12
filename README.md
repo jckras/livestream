@@ -3,6 +3,8 @@
 This module implements the [rdk camera API](https://github.com/rdk/camera-api) in a youtube-stream model.
 With this model, you can provide a youtube URL as a configurable attribute to a camera component.
 
+With this model, you can provide a URL to a video hosted on youtube or [other supported websites](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md) as a configurable attribute to a camera component.
+
 ## Requirements
 
 The module executable is currently only supported on `linux/arm64`, `linux/amd64`, and `darwin/arm64`. Make sure your machine is running on one of these architectures to avoid exec format issues.
@@ -34,7 +36,7 @@ Specific Example
 
 ```json
 {
-  "video_url": "https://www.youtube.com/watch?v=ydYDqZQpim8"
+  "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 }
 ```
 
@@ -55,7 +57,7 @@ The following attributes are available for `julie:livestream:youtube-stream` cam
       "type": "camera",
       "model": "julie:livestream:youtube-stream",
       "attributes": {
-        "video_url": "https://www.youtube.com/watch?v=ydYDqZQpim8"
+        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
       }
     }
 ```

@@ -33,9 +33,9 @@ class youtubeStream(Camera, Reconfigurable):
     # Constructor
     @classmethod
     def new(cls, config: ComponentConfig, dependencies: Mapping[ResourceName, ResourceBase]) -> Self:
-        my_class = cls(config.name)
-        my_class.reconfigure(config, dependencies)
-        return my_class
+        my_stream = cls(config.name)
+        my_stream.reconfigure(config, dependencies)
+        return my_stream
     
     def __init__(self, name: str):
         super().__init__(name)
