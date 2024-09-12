@@ -11,7 +11,7 @@ The module executable is currently only supported on `linux/arm64`, `linux/amd64
 
 ## Build and Run
 
-To use this module, follow these instructions to [add a module from the Viam Registry](https://docs.viam.com/registry/configure/#add-a-modular-resource-from-the-viam-registry) and select the `julie:vlivestream:youtube-stream` model from the [`livestream` module](https://app.viam.com/module/rdk/julie:camera:youtube-stream).
+To use this module, follow these instructions to [add a module from the Viam Registry](https://docs.viam.com/registry/configure/#add-a-modular-resource-from-the-viam-registry) and select the `julie:livestream:youtube-stream` model from the [`livestream` module](https://app.viam.com/module/rdk/julie:camera:youtube-stream).
 
 ## Configure your camera
 
