@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 cd `dirname $0`
-
+VENV_NAME=viam-venv
 echo "Current Directory: $(pwd)"
 echo "Checking for virtual environment folder..."
 
@@ -9,13 +9,12 @@ if [ -d "viam-env" ]
   then
     echo "Virtual environment found, activating..."
     source viam-env/bin/activate
-    echo "Virtual environment activated: $VIRTUAL_ENV"
+    echo "Virtual environment activated: $VENV_NAME"
   else
     echo "Setting up virtual environment..."
-    python3 -m pip install --user virtualenv
-    python3 -m venv viam-env
-    source viam-env/bin/activate
-    echo "Virtual environment activated: $VIRTUAL_ENV"
+    python3 -m venv --system-site-packages "$VENV_NAME"
+    source "$VENV_NAME/bin/activate"
+    echo "Virtual environment activated: $VENV_NAME"
     echo "Installing dependencies from requirements.txt..."
 
     while IFS= read -r requirement; do
