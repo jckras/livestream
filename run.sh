@@ -3,9 +3,9 @@ set -e
 cd `dirname $0`
 
 echo "Current Directory: $(pwd)"
-echo "Checking for .installed file..."
+echo "Checking for virtual environment folder..."
 
-if [ -f .installed ] 
+if [ -d "viam-env" ]
   then
     echo "Virtual environment found, activating..."
     source viam-env/bin/activate
@@ -26,7 +26,6 @@ if [ -f .installed ]
     done < requirements.txt
 
     echo "Dependencies installation complete."
-    touch .installed
 
   fi
 # Be sure to use `exec` so that termination signals reach the python process,

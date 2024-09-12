@@ -26,7 +26,7 @@ class youtubeStream(Camera, Reconfigurable):
     video_url: str
     default_url: str = "https://www.youtube.com/watch?v=MusSS4R9SPw"
 
-    MODEL: ClassVar[Model] = Model(ModelFamily("julie", "camera"), "youtubeStream")
+    MODEL: ClassVar[Model] = Model(ModelFamily("julie", "livestream"), "youtube-stream")
     REQUIRED_ATTRIBUTES: ClassVar[List[str]] = ["video_url"]
     
 
@@ -39,8 +39,6 @@ class youtubeStream(Camera, Reconfigurable):
     
     def __init__(self, name: str):
         super().__init__(name)
-        self.last_call_time: float = time.time()
-        self.current_frame: int = 0
         self.video_cap: Optional [cv2.VideoCapture] = None
 
     # Validates JSON Configuration
@@ -90,8 +88,6 @@ class youtubeStream(Camera, Reconfigurable):
             raise RuntimeError("Failed to fetch the YouTube stream URL.")
         
     async def get_image(self, mime_type: str = "", *, extra: Optional[Dict[str, Any]] = None, timeout: Optional[float] = None, **kwargs) -> ViamImage:
-        current_time = time.time()
-
         # Check if video capture is initialized
         if self.video_cap is None:
             raise RuntimeError("Video capture is not initialized.")
@@ -104,8 +100,6 @@ class youtubeStream(Camera, Reconfigurable):
         if not ret:
             raise RuntimeError("Failed to capture any frame from the video.")
                 
-        self.last_call_time = current_time
-
         ret, jpeg = cv2.imencode('.jpg', frame)
         if not ret:
             raise RuntimeError("Failed to encode frame as JPEG.")
@@ -124,7 +118,7 @@ class youtubeStream(Camera, Reconfigurable):
         
     async def get_properties(self, *, timeout: Optional[float] = None, **kwargs) -> 'Camera.Properties':
         return Camera.Properties(
-        mime_types=['video/mp4', 'image/jpeg']  
+        mime_types=['image/jpeg']  
     )
 
     
