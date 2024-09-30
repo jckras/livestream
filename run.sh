@@ -1,33 +1,29 @@
 #!/bin/bash
 set -e
 cd `dirname $0`
-VENV_NAME=viam-venv
+VENV_NAME=".venv"
 echo "Current Directory: $(pwd)"
 echo "Checking for virtual environment folder..."
 
-if [ -d "viam-env" ]
+if [ -d "$VENV_NAME" ]
   then
     echo "Virtual environment found, activating..."
-    source viam-env/bin/activate
+    source "$VENV_NAME/bin/activate"
     echo "Virtual environment activated: $VENV_NAME"
   else
     echo "Setting up virtual environment..."
-    python3 -m venv --system-site-packages "$VENV_NAME"
+    uv venv --python=3.10
     source "$VENV_NAME/bin/activate"
     echo "Virtual environment activated: $VENV_NAME"
     echo "Installing dependencies from requirements.txt..."
 
-    while IFS= read -r requirement; do
-      if [ -n "$requirement" ]; then
-        echo "Installing $requirement..."
-        pip install "$requirement" || echo "Failed to install $requirement"
-      fi
-    done < requirements.txt
-
+    uv pip install -r requirements.txt
     echo "Dependencies installation complete."
 
   fi
 # Be sure to use `exec` so that termination signals reach the python process,
 # or handle forwarding termination signals manually
-echo "Starting Python module..."
-exec python3 -m src $@
+PYTHON_LIB_PATH=$(find .venv/lib -type d -name "python3.*" -print -quit)
+CV2_UTILS_PATH="$PYTHON_LIB_PATH/site-packages/cv2"
+python3 -m PyInstaller --onefile --hidden-import="googleapiclient" --add-data "$CV2_UTILS_PATH:cv2" src/main.py
+tar -czvf dist/archive.tar.gz dist/main

@@ -1,7 +1,7 @@
 import asyncio
 from viam.module.module import Module
 from viam.components.camera import Camera
-from .youtubeStream import youtubeStream
+from youtubeStream import youtubeStream
 from viam.resource.registry import Registry, ResourceCreatorRegistration
 
 
