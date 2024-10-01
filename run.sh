@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
-cd `dirname $0`
+
+UNAME=$(uname -s)
+
 VENV_NAME=".venv"
 echo "Current Directory: $(pwd)"
 echo "Checking for virtual environment folder..."
@@ -12,15 +14,26 @@ if [ -d "$VENV_NAME" ]
     echo "Virtual environment activated: $VENV_NAME"
   else
     echo "Setting up virtual environment..."
+    if [ "$UNAME" = "Linux" ]
+    then
+      echo "Installing uv on Linux"
+      pip install uv
+    fi
+    if [ "$UNAME" = "Darwin" ]
+    then
+      echo "Installing uv on Darwin"
+      brew install uv
+    fi
+
     uv venv --python=3.10
-    source "$VENV_NAME/bin/activate"
+    source .venv/bin/activate
     echo "Virtual environment activated: $VENV_NAME"
     echo "Installing dependencies from requirements.txt..."
-
     uv pip install -r requirements.txt
     echo "Dependencies installation complete."
 
   fi
+
 # Be sure to use `exec` so that termination signals reach the python process,
 # or handle forwarding termination signals manually
 PYTHON_LIB_PATH=$(find .venv/lib -type d -name "python3.*" -print -quit)
