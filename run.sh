@@ -27,6 +27,13 @@ if [ ! -d "$VENV_NAME" ]; then
   
   if [ "$UNAME" = "Linux" ]; then
     echo "Installing uv on Linux"
+
+    # Check if pip is installed
+    if ! command -v pip &> /dev/null; then
+      echo "'pip' not found. Installing pip..."
+      sudo apt-get install -y python3-pip
+    fi
+
     pip install uv
   fi
   
