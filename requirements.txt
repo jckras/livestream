@@ -1,5 +1,5 @@
+viam-sdk==0.29.3
 opencv-python==4.10.0.84
-viam-sdk==0.29.1
 yt-dlp==2024.8.6
-pyinstaller
-google-api-python-client
+pyinstaller==6.3.0
+google-api-python-client==2.0.0

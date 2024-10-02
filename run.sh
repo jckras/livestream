@@ -27,13 +27,12 @@ if [ ! -d "$VENV_NAME" ]; then
   
   if [ "$UNAME" = "Linux" ]; then
     echo "Installing uv on Linux"
-
     # Check if pip is installed
     if ! command -v pip &> /dev/null; then
       echo "'pip' not found. Installing pip..."
-      sudo apt-get install -y python3-pip
-    fi
+      sudo apt-get update && sudo apt-get install -y python3-pip
 
+    fi
     pip install uv
   fi
   
@@ -41,15 +40,16 @@ if [ ! -d "$VENV_NAME" ]; then
     echo "Installing uv on Darwin"
     brew install uv
   fi
-  
-  uv venv --python=3.10
-  source "$VENV_NAME/bin/activate"
-  echo "Virtual environment activated: $VENV_NAME"
-  
-  echo "Installing dependencies from requirements.txt..."
-  uv pip install -r requirements.txt
-  echo "Dependencies installation complete."
 fi
+
+uv venv --python=3.10
+source "$VENV_NAME/bin/activate"
+echo "Virtual environment activated: $VENV_NAME"
+  
+echo "Installing dependencies from requirements.txt..."
+uv pip install --upgrade pip
+uv pip install -r requirements.txt
+echo "Dependencies installation complete."
 
 PYTHON_LIB_PATH=$(find .venv/lib -type d -name "python3.*" -print -quit)
 CV2_UTILS_PATH="$PYTHON_LIB_PATH/site-packages/cv2"
