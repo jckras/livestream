@@ -14,7 +14,7 @@ jobs:
           # note: you can replace this line with 'version: ""' if
           # you want to test the build process without deploying
           # version: ${{ github.ref_name }}
-          version: "" # hard coding for testing 
+          version: "2.0.1-rc" # hard coding for testing 
           ref: ${{ github.sha }}
           key-id: ${{ secrets.viam_key_id }}
           key-value: ${{ secrets.viam_key_value }}
