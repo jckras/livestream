@@ -2,6 +2,7 @@
 set -e
 
 UNAME=$(uname -s)
+# echo "OSTYPE is: $OSTYPE"
 
 VENV_NAME=".venv"
 echo "Current Directory: $(pwd)"
@@ -25,8 +26,8 @@ fi
 if [ ! -d "$VENV_NAME" ]; then
   echo "Setting up virtual environment..."
   
-  if [ "$UNAME" = "Linux" ]; then
-    echo "Installing uv on Linux"
+if [ "$UNAME" = "Linux" ]; then
+   echo "Installing uv on Linux"
     # Check if pip is installed
     if ! command -v pip &> /dev/null; then
       echo "'pip' not found. Installing pip..."
@@ -36,10 +37,11 @@ if [ ! -d "$VENV_NAME" ]; then
     pip install uv
   fi
   
-  if [ "$UNAME" = "Darwin" ]; then
-    echo "Installing uv on Darwin"
-    brew install uv
-  fi
+if [ "$UNAME" = "Darwin" ]; then
+    echo "Installing uv on Darwin" 
+    # brew install uv
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    source $HOME/.cargo/env
 fi
 
 uv venv --python=3.10
