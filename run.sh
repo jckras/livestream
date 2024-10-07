@@ -2,30 +2,10 @@
 set -e
 
 UNAME=$(uname -s)
-# echo "OSTYPE is: $OSTYPE"
 
-VENV_NAME=".venv"
 echo "Current Directory: $(pwd)"
 echo "Checking for virtual environment folder..."
 
-if [ -d "$VENV_NAME" ]; then
-  echo "Virtual environment found, activating..."
-  source "$VENV_NAME/bin/activate"
-
-  # Check if 'uv' can be imported in Python
-  if ! python3 -c "import uv" > /dev/null 2>&1; then
-    echo "'uv' not found in virtual environment. Recreating the virtual environment..."
-    deactivate
-    rm -rf "$VENV_NAME"
-  else
-    echo "'uv' is installed, skipping recreation of virtual environment."
-  fi
-fi
-
-# Create a new virtual environment if it doesn't exist or was removed
-if [ ! -d "$VENV_NAME" ]; then
-  echo "Setting up virtual environment..."
-  
 if [ "$UNAME" = "Linux" ]; then
    echo "Installing uv on Linux"
     # Check if pip is installed
@@ -39,11 +19,9 @@ if [ "$UNAME" = "Linux" ]; then
   
 if [ "$UNAME" = "Darwin" ]; then
     echo "Installing uv on Darwin" 
-    # brew install uv
     curl -LsSf https://astral.sh/uv/install.sh | sh
     source $HOME/.cargo/env
 fi
-
 uv venv --python=3.10
 source .venv/bin/activate
   
