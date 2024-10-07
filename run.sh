@@ -43,8 +43,7 @@ if [ ! -d "$VENV_NAME" ]; then
 fi
 
 uv venv --python=3.10
-source "$VENV_NAME/bin/activate"
-echo "Virtual environment activated: $VENV_NAME"
+source .venv/bin/activate
   
 echo "Installing dependencies from requirements.txt..."
 uv pip install --upgrade pip
