@@ -2,7 +2,6 @@
 set -e
 
 UNAME=$(uname -s)
-
 echo "Current Directory: $(pwd)"
 echo "Checking for virtual environment folder..."
 
