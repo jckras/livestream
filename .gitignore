@@ -8,3 +8,7 @@ viam-env/
 # Unit tests / Coverage reports
 .cache
 .DS_Store
+
+*.spec
+build/
+dist/

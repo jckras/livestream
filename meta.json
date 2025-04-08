@@ -7,7 +7,9 @@
   "models": [
     {
       "api": "rdk:component:camera",
-      "model": "julie:livestream:youtube-stream"
+      "model": "julie:livestream:youtube-stream",
+      "short_description": "Display YouTube videos as a live stream from a camera.",
+      "markdown_link": "README.md#configure-your-camera"
     }
   ],
   "build": {
