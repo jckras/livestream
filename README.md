@@ -47,19 +47,14 @@ The following attributes are available for `julie:livestream:youtube-stream` cam
 | Name | Type | Inclusion | Description |
 | ---- | ---- | --------- | ----------- |
 | `video_url` | string | **Required** |  This URL specifies the livestream video that the camera will play. |
+| `resolution` | string | Optional |  The resolution specifier for the video, i.e. "480p", "720p", "1080p", "1440p", "bestvideo" (default) |
 
 ### Example Configuration
 
 ```json
 {
-      "name": "my-youtube-stream",
-      "namespace": "rdk",
-      "type": "camera",
-      "model": "julie:livestream:youtube-stream",
-      "attributes": {
-        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-      }
-    }
+    "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+}
 ```
 
 ## Troubleshooting
